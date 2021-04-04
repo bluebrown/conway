@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Conway's Game of Life</title>
+  <style>
+    body {
+      text-align: center;
+      background-color: #2f2f34;
+      min-height: 100vh;
+      font-family: 'Fira Sans', sans-serif;
+      color: #676767;
+      display: flex;
+      justify-content: center;
+      justify-items: center;
+    }
+    #grid {
+      margin: auto 0;
+      display: grid;
+      grid-template-columns: repeat( {{.W}} , 8px);
+      grid-template-rows: repeat( {{.H}} , 8px);
+      box-shadow:  0 0.5em 1em -0.125em rgb(10 10 10 / 10%), 0 0 0 1px rgb(10 10 10 / 2%);
+      border-radius: 9001px;
+      background-color: black;
+
+    }
+    #grid div {
+      border: 1px solid #555;
+      border-radius: 9001px;
+
+    }
+    #grid div.true {
+      background-color: green;
+    }
+  </style>
+</head>
+<body>
+    <section id="grid"></section>
+  <script>
+    const grid = document.getElementById('grid');
+    new Array( {{.H}} * {{.W}} ).fill(true).forEach(() => grid.append(document.createElement('div')));
+    const evtSource = new EventSource("/sse");
+    evtSource.onmessage = (event, i = 0) => JSON.parse(event.data)
+      .forEach(row => row.forEach(cell => grid.children[i++].classList = cell))
+  </script>
+</body>
+</html>
