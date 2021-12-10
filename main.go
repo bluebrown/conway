@@ -21,7 +21,7 @@ type data struct {
 }
 
 func main() {
-	t := template.Must(template.ParseFiles("index.html"))
+	t := template.Must(template.ParseFiles("index.tmpl"))
 	b := new(bytes.Buffer)
 
 	d := data{width, height}

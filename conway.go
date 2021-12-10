@@ -51,7 +51,6 @@ func (f *field) step() field {
 			}
 
 			// count 8 neighbors
-			// continue early if more than 3 neighers are found
 			ngbrs := 0
 			// top left
 			if f[rowTop][colLef] {
